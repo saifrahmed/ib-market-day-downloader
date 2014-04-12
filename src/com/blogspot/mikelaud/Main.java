@@ -1,5 +1,8 @@
 package com.blogspot.mikelaud;
 
+import com.blogspot.mikelaud.logic.Logger;
+import com.blogspot.mikelaud.logic.Program;
+
 public class Main {
 
 	public static void main(String[] args) {

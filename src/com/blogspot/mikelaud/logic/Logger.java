@@ -1,4 +1,4 @@
-package com.blogspot.mikelaud;
+package com.blogspot.mikelaud.logic;
 
 public class Logger {
 
