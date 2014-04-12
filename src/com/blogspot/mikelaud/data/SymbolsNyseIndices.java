@@ -1,6 +1,6 @@
 package com.blogspot.mikelaud.data;
 
-public class SymbolsNyseIndices implements Symbols {
+public class SymbolsNyseIndices extends SymbolsAbstract {
 
 	private final String[] SYMBOLS =
 	{	"AD-NYSE"
@@ -57,22 +57,14 @@ public class SymbolsNyseIndices implements Symbols {
 	,	"VOL-NYSE"
 	,	"XPJ.IV"
 	};
-	
-	public int getCount() {
-		return SYMBOLS.length;
-	}
-	
-	public String getSymbol(int aSymbolId) {
-		if (aSymbolId >= 0 && aSymbolId < getCount()) {
-			return SYMBOLS[aSymbolId];
-		}
-		else {
-			return "";
-		}
+
+	@Override
+	protected String[] getSymbols() {
+		return SYMBOLS;
 	}
 	
 	public SymbolsNyseIndices() {
 		// void
 	}
-	
+
 }

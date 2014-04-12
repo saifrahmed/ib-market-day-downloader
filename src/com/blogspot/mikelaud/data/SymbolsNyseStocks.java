@@ -1,6 +1,6 @@
 package com.blogspot.mikelaud.data;
 
-public class SymbolsNyseStocks implements Symbols {
+public class SymbolsNyseStocks extends SymbolsAbstract {
 
 	private final String[] SYMBOLS =
 	{	"A"
@@ -3247,17 +3247,9 @@ public class SymbolsNyseStocks implements Symbols {
 	,	"ZX"
 	};
 	
-	public int getCount() {
-		return SYMBOLS.length;
-	}
-	
-	public String getSymbol(int aSymbolId) {
-		if (aSymbolId >= 0 && aSymbolId < getCount()) {
-			return SYMBOLS[aSymbolId];
-		}
-		else {
-			return "";
-		}
+	@Override
+	protected String[] getSymbols() {
+		return SYMBOLS;
 	}
 	
 	public SymbolsNyseStocks() {
