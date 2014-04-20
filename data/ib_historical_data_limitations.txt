@@ -1,0 +1,57 @@
+Interactive Brokers: Historical Data Limitations
+
+1) Historical data requests that use a bar size below 30 seconds can only go back six months.
+2) Historical data requests can go back one full calendar year.
+
+3)
+The error code and message that indicates a pacing violation is:
+162 - Historical Market Data Service error message: Historical data request pacing violation
+
+The following conditions can cause a pacing violation:
+- Making identical historical data requests within 15 seconds
+- Making six or more historical data requests for
+  the same Contract, Exchange and Tick Type within two seconds.
+
+4)
+Also, observe the following limitation when requesting historical data:
+- Do not make more than 60 historical data requests in any ten-minute period.
+- If the whatToShow parameter in reqHistoricalData() is set to BID_ASK, then
+  this counts as two requests and we will call BID and ASK historical data separately.
+
+5) Minimum bar size settings for API historical data requests:
+
+	Duration	Minimum Bar Size
+	--------        ----------------
+	1 min		1 second
+	5 mins		1 second
+	15 mins		1 second
+	1 hour		5 seconds
+	2 hours		5 seconds
+	4 hours		10 seconds
+	1 day		30 seconds
+	2 days		1 minute
+	1 week		10 minutes
+	2 weeks		15 minutes
+	1 month		30 minutes
+	3 months	1 day
+	Everything else	1 day
+
+6) reqHistoricalData()
+
+	Parameter	Type		Sample
+	---------	----		-----------
+	tickerId	int		1
+	contract	Contract	A/STK/NYSE/NYSE/USD
+					(Symbol/Security Type/Exchange/Primary Exchange/Currency)
+	endDateTime	String		20140404  23:59:59 EST
+					(yyyymmdd{space}{space}hh:mm:dd)
+	durationStr	String		2 D
+	barSizeSetting	String		1 min
+	whatToShow	String		TRADES
+	useRTH		int		1
+	formatDate	int		1
+
+7)
+3242 stocks * 11 sec = 35662 sec ~= 10h
+
+%%
