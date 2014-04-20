@@ -38,18 +38,18 @@ Also, observe the following limitation when requesting historical data:
 
 6) reqHistoricalData()
 
-	Parameter	Type		Sample
-	---------	----		-----------
-	tickerId	int		1
-	contract	Contract	A/STK/NYSE/NYSE/USD
-					(Symbol/Security Type/Exchange/Primary Exchange/Currency)
-	endDateTime	String		20140404  23:59:59 EST
-					(yyyymmdd{space}{space}hh:mm:dd)
-	durationStr	String		2 D
+	Parameter		Type		Sample
+	---------		----		-----------
+	tickerId		int			1
+	contract		Contract	A/STK/NYSE/NYSE/USD
+								(Symbol/Security Type/Exchange/Primary Exchange/Currency)
+	endDateTime		String		20140404  23:59:59 EST
+								(yyyymmdd{space}{space}hh:mm:dd)
+	durationStr		String		2 D
 	barSizeSetting	String		1 min
-	whatToShow	String		TRADES
-	useRTH		int		1
-	formatDate	int		1
+	whatToShow		String		TRADES
+	useRTH			int			1
+	formatDate		int			1
 
 7)
 3242 stocks * 11 sec = 35662 sec ~= 10h
