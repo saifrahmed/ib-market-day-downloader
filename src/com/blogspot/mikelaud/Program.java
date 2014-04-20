@@ -1,10 +1,13 @@
-package com.blogspot.mikelaud.logic;
+package com.blogspot.mikelaud;
 
 import com.blogspot.mikelaud.data.Symbols;
 import com.blogspot.mikelaud.data.SymbolsNyseStocks;
+import com.blogspot.mikelaud.ib.Connection;
 
 public class Program implements Runnable {
 
+	private Connection mConnection = new Connection();
+	
 	private String getBeginFormat(int aSymbolMaxSize) {
 		StringBuilder formatBuilder = new StringBuilder();
 		formatBuilder.append("%2dh %2dm [%2d%%] %");
@@ -25,9 +28,7 @@ public class Program implements Runnable {
 		// void
 	}
 	
-	@Override
-	public void run() {
-		//
+	private void processSymbols() {
 		Symbols symbols = new SymbolsNyseStocks();
 		int symbolsCount = symbols.getCount();
 		int symbolMaxSize = symbols.getSymbolMaxSize();
@@ -61,6 +62,22 @@ public class Program implements Runnable {
 			processSymbol(id, symbol);
 			String endLine = String.format(endFormat, id + 1);
 			Logger.println(endLine);
+		}
+	}
+	
+	@Override
+	public void run() {
+		try {
+			mConnection.connect();
+			Logger.println("Connected.");
+			processSymbols();
+		}
+		catch(Throwable t) {
+			Logger.logError("Fatal error: " + t.getMessage());
+		}
+		finally {
+			mConnection.disconnect();
+			Logger.println("Done.");
 		}
 	}
 	
