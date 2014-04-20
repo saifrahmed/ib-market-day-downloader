@@ -195,14 +195,6 @@ public abstract class ConnectionBase implements EWrapper {
 	}
 
 	@Override
-	public void historicalData(int reqId, String date, double open,
-			double high, double low, double close, int volume, int count,
-			double WAP, boolean hasGaps) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void scannerParameters(String xml) {
 		// TODO Auto-generated method stub
 		
