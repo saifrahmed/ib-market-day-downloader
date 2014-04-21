@@ -1,4 +1,7 @@
 ib-market-day-downloader
 ========================
 
-ib-market-day-downloader
+Prototype of: https://github.com/mikelaud/ib-market-data-downloader
+
+%%
+
