@@ -63,6 +63,10 @@ public class SymbolsNyseIndices extends SymbolsAbstract {
 		return SYMBOLS;
 	}
 	
+	public String getSecurityType() {
+		return "IND";
+	}
+	
 	public SymbolsNyseIndices() {
 		// void
 	}

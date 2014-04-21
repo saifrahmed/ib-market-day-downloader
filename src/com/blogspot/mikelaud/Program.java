@@ -46,11 +46,17 @@ public class Program implements Runnable {
 			int remainingMin = totalMin - (remainingH * 60);
 			//
 			String beginLine = String.format(beginFormat, remainingH, remainingMin, percent, symbol);
+			mConnection.printErrors();
 			Logger.print(beginLine);
 			mConnection.reqHistoricalData(symbol);
 			//
 			for (int i = 0; i < requestPeriodSec; i++) {
-				Logger.print(".");
+				if (mConnection.hasErrors()) {
+					Logger.print("x");
+				}
+				else {
+					Logger.print(".");
+				}
 				try {
 					Thread.sleep(1000);
 				}
@@ -70,6 +76,7 @@ public class Program implements Runnable {
 				Logger.print(endLine);
 				Logger.println("FAIL");
 			}
+			mConnection.printErrors();
 		}
 	}
 	

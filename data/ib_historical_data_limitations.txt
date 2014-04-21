@@ -47,6 +47,7 @@ Also, observe the following limitation when requesting historical data:
 
 	contract		Contract	A/STK/NYSE/NYSE/USD
 								(Symbol/Security Type/Exchange/Primary Exchange/Currency)
+								(Security Type: STK/OPT/FUT/IND/FOP/CASH/IND (stocks/futures/options/futures options/currencies/indices))
 
 	endDateTime		String		20140404  23:59:59 EST
 								(yyyymmdd{space}{space}hh:mm:dd)

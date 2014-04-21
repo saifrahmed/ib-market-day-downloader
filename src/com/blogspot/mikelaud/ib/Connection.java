@@ -1,5 +1,7 @@
 package com.blogspot.mikelaud.ib;
 
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 import com.blogspot.mikelaud.Logger;
 import com.blogspot.mikelaud.Settings;
 import com.ib.client.Contract;
@@ -11,6 +13,7 @@ public class Connection extends ConnectionBase {
 	private int mTickerId = 0;
 	private int mHistoricalDataCount = 0;
 	private volatile boolean mHistoricalDataDone = false;
+	private ConcurrentLinkedQueue<String> mErrors = new ConcurrentLinkedQueue<String>(); 
 	
 	private void checkConnection() throws Exception {
 		//
@@ -71,6 +74,10 @@ public class Connection extends ConnectionBase {
         );
 	}
 	
+	public int getHistoricalDataCount() {
+		return mHistoricalDataCount;
+	}
+
 	@Override
 	public void historicalData(int reqId, String date, double open,
 			double high, double low, double close, int volume, int count,
@@ -86,10 +93,53 @@ public class Connection extends ConnectionBase {
 		}
 		//
 		++mHistoricalDataCount;
+		/*
+		System.out.println(
+    		"id=" + reqId +
+    		" no=" + mHistoricalDataCount +
+    		" date=" + date +
+    		" open=" + open +
+    		" high=" + high +
+    		" low=" + low +
+    		" close=" + close +
+    		" volume=" + volume +
+    		" count=" + count +
+    		" WAP=" + WAP +
+    		" hasGaps=" + hasGaps
+    	);
+    	*/
+    	
 	}
 	
-	public int getHistoricalDataCount() {
-		return mHistoricalDataCount;
+	@Override
+	public void error(Exception e) {
+		mErrors.add(e.toString());
+	}
+
+	@Override
+	public void error(String str) {
+		mErrors.add(str);
+	}
+
+	@Override
+	public void error(int id, int errorCode, String errorMsg) {
+		mErrors.add("(id=" + id + " errorCode=" + errorCode + ") " + errorMsg);
+	}
+	
+	public boolean hasNoErrors() {
+		return mErrors.isEmpty();
+	}
+	
+	public boolean hasErrors() {
+		return ! hasNoErrors();
+	}
+		
+	public void printErrors() {
+		for (;;) {
+			String error = mErrors.poll();
+			if (null == error) break;
+			Logger.logError(error);
+		}
 	}
 	
 	public boolean isConnected() { return mClientSocket.isConnected(); }

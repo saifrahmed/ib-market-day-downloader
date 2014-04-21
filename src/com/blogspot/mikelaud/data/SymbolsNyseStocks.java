@@ -3252,6 +3252,10 @@ public class SymbolsNyseStocks extends SymbolsAbstract {
 		return SYMBOLS;
 	}
 	
+	public String getSecurityType() {
+		return "STK";
+	}
+		
 	public SymbolsNyseStocks() {
 		// void
 	}
